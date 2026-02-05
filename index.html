@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Madison Parker Capital | Business Funding</title>
+<link rel="icon" type="image/png" href="m.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --purple-900: #2D1B4E;
+            --purple-700: #4A2C7A;
+            --purple-600: #5E3A9A;
+            --purple-500: #7C4DBA;
+            --purple-400: #9D6FD9;
+            --purple-300: #B794E5;
+            --purple-200: #D4BFF0;
+            --purple-100: #F3EEFA;
+            --purple-50: #F9F7FC;
+            --gray-900: #1A1A2E;
+            --gray-600: #555;
+            --gray-400: #999;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-up-delay-1 {
+            animation: fadeUp 0.8s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-up-delay-2 {
+            animation: fadeUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-up-delay-3 {
+            animation: fadeUp 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(45, 27, 78, 0.08);
+        }
+
+        .logo {
+            height: 60px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-600);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gray-900);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 99;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 600;
+            font-size: 1.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--purple-600);
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-700) 100%);
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 14px rgba(94, 58, 154, 0.35);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(94, 58, 154, 0.45);
+            transform: translateY(-2px);
+            color: #FFFFFF !important;
+        }
+
+        .btn-primary:visited,
+        .btn-primary:active,
+        .btn-primary:focus {
+            color: #FFFFFF !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1250px;
+            margin: 0 auto;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: visible;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100vw;
+            transform: translateX(-50%);
+            bottom: 0;
+            right: auto;
+            background: linear-gradient(135deg, #f8f6fc 0%, #f3eefa 30%, #ede4f7 60%, #e8daf4 100%);
+            z-index: -2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            color: var(--gray-900);
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-700) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+        
+        .funding-input-wrapper {
+            margin-bottom: 2rem;
+        }
+        
+        .funding-input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+            max-width: 500px;
+        }
+        
+        .funding-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 2px solid var(--purple-200);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--gray-900);
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+        
+        .funding-input:focus {
+            outline: none;
+            border-color: var(--purple-600);
+            box-shadow: 0 0 0 3px rgba(94, 58, 154, 0.1);
+        }
+        
+        .funding-input::placeholder {
+            color: var(--gray-400);
+        }
+        
+        .btn-get-funding {
+            padding: 1rem 2rem;
+            white-space: nowrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 650px;
+        }
+
+        .hero-circle-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 6px solid var(--white);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(94, 58, 154, 0.25);
+        }
+        
+        .hero-circle-1 {
+            width: 380px;
+            height: 380px;
+            top: 0;
+            left: 300px;
+            z-index: 2;
+        }
+
+        .hero-circle-2 {
+            width: 500px;
+            height: 500px;
+            bottom: 10px;
+            right: 30px;
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 5rem 5%;
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        /* Services Section - Simplified Square Cards */
+        .services {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--purple-100);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--purple-300);
+            box-shadow: 0 10px 30px rgba(94, 58, 154, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-200) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--purple-700);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+            line-height: 1.3;
+        }
+
+        .service-card p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-link {
+            color: var(--purple-600);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .service-link:hover {
+            color: var(--purple-700);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 6rem 5%;
+            background: var(--purple-50);
+            overflow: hidden;
+        }
+
+        .reviews-track {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--purple-100);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 8px 25px rgba(94, 58, 154, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--purple-100);
+            flex-shrink: 0;
+        }
+
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .review-name {
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        .review-stars {
+            color: #FFB800;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .review-source {
+            display: flex;
+            align-items: center;
+        }
+
+        .review-source svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background: var(--gray-900);
+            color: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1250px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .contact-text h2 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .contact-text p {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form > p {
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--purple-400);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--gray-900);
+            color: var(--white);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-inner {
+            padding: 4rem 5% 2rem;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo-accent {
+            background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-tagline {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+        }
+
+        .footer-heading {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a,
+        .footer-contact-item {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--purple-300);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 5%;
+        }
+
+        .footer-bottom-inner {
+            max-width: 1250px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--gray-400);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+                padding-top: 7rem;
+                min-height: auto;
+            }
+
+            .hero-text h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero-text p {
+                margin: 0 auto 2rem;
+            }
+
+            .funding-input-container {
+                margin: 0 auto;
+            }
+
+            .hero-visual {
+                height: 400px;
+            }
+
+            .hero-circle-1 {
+                width: 240px;
+                height: 240px;
+                left: 50%;
+                transform: translateX(-80%);
+            }
+
+            .hero-circle-2 {
+                width: 320px;
+                height: 320px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-20%);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .reviews-track {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-text {
+                text-align: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links,
+            .footer-contact {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .logo {
+                height: 50px;
+            }
+
+            .hero {
+                padding: 7rem 5% 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text h1 span {
+                display: block;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .funding-input-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .funding-input {
+                width: 100%;
+            }
+
+            .btn-get-funding {
+                width: 100%;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .hero-circle-1 {
+                width: 180px;
+                height: 180px;
+            }
+
+            .hero-circle-2 {
+                width: 240px;
+                height: 240px;
+            }
+
+            .stats {
+                padding: 3rem 5%;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.85rem;
+            }
+
+            .services {
+                padding: 4rem 5%;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .service-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .service-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 1rem;
+            }
+
+            .service-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .service-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .service-card p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .service-link {
+                font-size: 0.9rem;
+            }
+
+            .reviews {
+                padding: 4rem 5%;
+            }
+
+            .reviews-track {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .review-card {
+                padding: 1.5rem;
+            }
+
+            .contact {
+                padding: 4rem 5%;
+            }
+
+            .contact-text h2 {
+                font-size: 2rem;
+            }
+
+            .contact-text p {
+                font-size: 1rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                padding: 3rem 5% 1.5rem;
+            }
+
+            .footer-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-text h1 span {
+                display: block;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-icon {
+                width: 44px;
+                height: 44px;
+                margin-bottom: 0.75rem;
+            }
+
+            .service-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .service-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-card p {
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .service-link {
+                font-size: 0.85rem;
+            }
+
+            .stats-grid {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <img alt="Madison Parker Capital" class="logo" src="madison.png"/>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a class="btn btn-primary" href="https://spartan-projects-com.github.io/madison-parker/apply.html">Get Started</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#services" class="mobile-nav-link">Services</a>
+        <a href="#reviews" class="mobile-nav-link">Reviews</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+        <a class="btn btn-primary" href="https://spartan-projects-com.github.io/madison-parker/apply.html">Get Started</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1 class="animate-fade-up">
+                Business Funding <span>When You Need It</span>
+            </h1>
+            <p class="animate-fade-up-delay-1">
+Fast funding. No impact on your credit.
+            </p>
+            <div class="funding-input-wrapper animate-fade-up-delay-2">
+                <div class="funding-input-container">
+                    <input type="text" class="funding-input" placeholder="How Much Do You Need?" id="fundingInput">
+                    <a class="btn btn-primary btn-get-funding" href="https://spartan-projects-com.github.io/madison-parker/apply.html">Get Funding</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-circle-container">
+                <div class="hero-circle hero-circle-1">
+                    <img alt="Business owner" class="hero-image" src="1-hero.png"/>
+                </div>
+                <div class="hero-circle hero-circle-2">
+                    <img alt="Business collaboration" class="hero-image" src="2-hero.png"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">$300M+</div>
+                <div class="stat-label">Funding Provided</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Businesses Funded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24hrs</div>
+                <div class="stat-label">Average Approval</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Flexible Funding Solutions</h2>
+            <p>Quick access to capital, with solutions for every situation.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </div>
+                <h3>Business Line of Credit</h3>
+                <p>Access funds when you need them. Draw and repay on your terms with revolving credit from $10K to $500K.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3>Revenue-Based Financing</h3>
+                <p>Funding that scales with your business. Repayment adjusts to your monthly revenue, from $25K to $2M.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <h3>SBA Loans</h3>
+                <p>Government-backed financing with competitive rates and flexible terms for qualified businesses, up to $5M.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </div>
+                <h3>Equipment Financing</h3>
+                <p>Get the tools you need to grow. Finance new or used equipment up to $500K with flexible terms.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>Working Capital</h3>
+                <p>Short-term funding to cover operational expenses and seasonal fluctuations, from $5K to $500K.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="16"/></svg>
+                </div>
+                <h3>Commercial Real Estate</h3>
+                <p>Purchase, refinance, or renovate commercial property with specialized financing up to $10M.</p>
+                <a class="service-link" href="https://aquamark.fillout.com/madison">Learn more →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+        <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real reviews from real business owners.</p>
+        </div>
+        <div class="reviews-track">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><img alt="Michael R." src="michael.png"/></div>
+                    <div>
+                        <div class="review-name">Michael R.</div>
+                        <div class="review-date">2 weeks ago</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"They made the process incredibly straightforward. Funded in 3 days when my bank quoted 6 weeks."</p>
+                <div class="review-source">
+                    <svg fill="#4285F4" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><img alt="Sarah L." src="sarah.png"/></div>
+                    <div>
+                        <div class="review-name">Sarah L.</div>
+                        <div class="review-date">1 month ago</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Professional team that actually understands small business. No runaround, just real solutions."</p>
+                <div class="review-source">
+                    <svg fill="#4285F4" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><img alt="David K." src="david.png"/></div>
+                    <div>
+                        <div class="review-name">David K.</div>
+                        <div class="review-date">3 weeks ago</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Second time working with them. Same great experience. They've become our go-to for growth capital."</p>
+                <div class="review-source">
+                    <svg fill="#4285F4" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar"><img alt="Jennifer T." src="jennifer.png"/></div>
+                    <div>
+                        <div class="review-name">Jennifer T.</div>
+                        <div class="review-date">1 week ago</div>
+                    </div>
+                </div>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Fast, transparent, and fair. Got exactly what I needed to open our second location."</p>
+                <div class="review-source">
+                    <svg fill="#4285F4" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-text">
+                <h2>Let's Build Something Together</h2>
+                <p>Tell us about your business and funding needs.</p>
+                <a class="btn btn-primary" href="tel:+16317916542">Call (631) 791-6542</a>
+            </div>
+            <div class="contact-form">
+                <div style="width:100%;height:500px;" data-fillout-id="bYrD3rJdveus" data-fillout-embed-type="standard" data-fillout-inherit-parameters data-fillout-dynamic-resize></div><script src="https://server.fillout.com/embed/v1/"></script>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">Madison Parker <span class="footer-logo-accent">Capital</span></div>
+                    <div class="footer-tagline">Business funding solutions</div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-heading">Services</div>
+                    <a href="#services">Line of Credit</a>
+                    <a href="#services">Equipment Financing</a>
+                    <a href="#services">SBA Loans</a>
+                    <a href="https://spartan-projects-com.github.io/madison-parker/privacy-policy" target="_blank" rel="noopener">Privacy</a>
+                </div>
+
+                <div class="footer-contact">
+                    <div class="footer-heading">Contact</div>
+                    <div class="footer-contact-item">Nesconset, New York, USA</div>
+                    <a class="footer-contact-item" href="mailto:info@madisonparkercapital.com">info@madisonparkercapital.com</a>
+                    <a class="footer-contact-item" href="tel:+16317916542">631-791-6542</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-inner">© 2026 – Madison Parker Enterprises. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile nav when clicking a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Format currency input - numbers only
+        const fundingInput = document.getElementById('fundingInput');
+        if (fundingInput) {
+            fundingInput.addEventListener('input', function(e) {
+                // Remove all non-digit characters
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value) {
+                    // Format as currency
+                    value = parseInt(value).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    e.target.value = value;
+                } else {
+                    e.target.value = '';
+                }
+            });
+            
+            // Prevent non-numeric input on keypress
+            fundingInput.addEventListener('keypress', function(e) {
+                // Allow only numbers
+                if (!/^\d$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab') {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
